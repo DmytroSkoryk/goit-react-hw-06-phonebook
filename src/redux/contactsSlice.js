@@ -12,13 +12,6 @@ const contactsSlice = createSlice({
   reducers: {
     addContact: {
       reducer(state, action) {
-        const isDuplicateName = state.find(
-          contact => contact.name === action.payload.name
-        );
-        if (isDuplicateName) {
-          alert(`${action.payload.name} is already in contacts`);
-          return state;
-        }
         return [...state, action.payload];
       },
       prepare(name, number) {

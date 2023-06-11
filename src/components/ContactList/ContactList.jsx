@@ -3,10 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'reselect';
 import { deleteContact } from '../../redux/contactsSlice';
 import Filter from '../Filter/Filter';
+import { getContacts, getFilter } from '../../redux/selectors';
 import css from './ContactList.module.css';
-
-const getContacts = state => state.contacts;
-const getFilter = state => state.filter.trim().toLowerCase();
 
 const filteredContactsSelector = createSelector(
   [getContacts, getFilter],

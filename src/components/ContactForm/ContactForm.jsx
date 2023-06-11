@@ -1,17 +1,24 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
+import { getContacts } from '../../redux/selectors';
 import css from './ContactForm.module.css';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    dispatch(addContact(name, number));
     form.reset();
+    const isDuplicateName = contacts.find(contact => contact.name === name);
+    if (isDuplicateName) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+    dispatch(addContact(name, number));
   };
 
   return (
